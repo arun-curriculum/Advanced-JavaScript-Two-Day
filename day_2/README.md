@@ -70,7 +70,7 @@ oReq.send(data);
 
 - You can write any normal HTML here, but you can also write Handlebars-specific code:
 
-```
+```html
 <script id="my-template" type="text/x-handlebars-template">
 	<div class="entry">
 		<h1>{{title}}</h1>
