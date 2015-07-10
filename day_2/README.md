@@ -43,6 +43,71 @@ oReq.open("get", "URL HERE", true);
 oReq.send();
 ```
 
+- POST requests allow us to submit a packet of data to the server.
+- Let's see how the request changes:
+
+```javascript
+var oReq = new XMLHttpRequest();
+
+oReq.open('POST', 'URL HERE', true);
+
+oReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+
+oReq.send(data);
+```
+
+##Front-End Templating with Handlebars
+- Generally it's not a good idea to put HTML code inside of JavaScript files.
+- Templating allows us to write the standard HTML syntax and convert blocks of code into dynamic templates that can be inserted anywhere on the page.
+- Handlebars is a library that offers us an easy to use syntax to handle templating.
+
+####How to Use Handlebars
+- Handlebars templates are handled through `<script>` tags, which allow them to be ignored while rendering the page:
+
+```
+<script id="my-template" type="text/x-handlebars-template">
+```
+
+- You can write any normal HTML here, but you can also write Handlebars-specific code:
+
+```
+<script id="my-template" type="text/x-handlebars-template">
+	<div class="entry">
+		<h1>{{title}}</h1>
+		<div class="body">
+			{{body}}
+		</div>
+	</div>
+</script>
+```
+
+- The curly code is essentially keys to a JSON object.
+- Before a template is used however, it must be first "compiled":
+
+```javascript
+var source = document.getElementById("my-template").innerHTML;
+var template = Handlebars.compile(source);
+```
+
+- The function `Handlebars.compile` returns a function that can be passed JSON data as an argument.
+- This resulting function returns HTML after the JSON data is processed into it.
+- You can then apply your template anywhere you need to:
+
+```javascript
+var jsonData = {
+	title: "My New Post",
+	body: "This is my first post!"
+};
+
+var template_html = template(jsonData);
+document.getElementById("some-div").innerHTML = template_html;
+```
+
+##Handlebars Lab
+- Make a GET request out to `http://daretodiscover.herokuapp.com/books` to retrieve book data.
+- Use Handlebars to create a simple template for each JSON object returned.
+- The front end has already been done for you [here](book_manager_html/).
+
 ##Introduction to Web Sockets
 - One of the most powerful uses for Node is its ability to handle seamless "real-time" experiences.
 - Sockets are a way for a browser and server to communicate without the standard request-response cycle.
@@ -88,3 +153,44 @@ socket.emit('event', params);
 - You will be working in js/app.js to develop the code to interact with the web socket server.
 - The server can be found at: http://arunchatserver.herokuapp.com/
 - **Bonus:** Use your knowledge of front end JavaScript to change the page title when a new chat is received.
+
+##Introduction to Web Workers
+- Web workers add concurrency support for JavaScript.
+- With web workers you can accomplish multi-threaded processes with little effort.
+- You would generally use a web worker to run a long-running script of some kind that can run in the background.
+- Let's see how they work:
+
+#####Setting up a web worker
+
+```javascript
+var worker = new Worker("counter.js");
+```
+
+#####Responding to worker events
+- Workers can trigger events which can be detected.
+
+```javascript
+worker.addEventListener("message", function(event) {
+	console.log(event.data);
+});
+```
+
+#####Sending messages from workers (in counter.js)
+- Workers can send messages back to the main file.
+
+```javascript
+self.postMessage(data);
+```
+
+#####Invoking a worker
+- Workers need to be started from the main file in order to run.
+
+```javascript
+worker.postMessage();
+```
+
+##Web Worker Exercise
+- In this exercise we will practice web workers by building a simple counter.
+- You will create a worker that sets an interval and increases a count by 1 every one second.
+- The worker should post the count back to the main file as a message.
+- The main file should detect the message and display the new count on the page.
