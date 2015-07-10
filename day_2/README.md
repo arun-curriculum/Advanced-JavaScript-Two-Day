@@ -64,7 +64,7 @@ oReq.send(data);
 ####How to Use Handlebars
 - Handlebars templates are handled through `<script>` tags, which allow them to be ignored while rendering the page:
 
-```
+```html
 <script id="my-template" type="text/x-handlebars-template">
 ```
 
