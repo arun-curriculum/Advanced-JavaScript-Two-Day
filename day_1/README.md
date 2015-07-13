@@ -129,17 +129,6 @@ function sayName() {
 
 - Here we want to re-run the whole function is the name does not equal "Arun".
 
-#####Recursion in the real-world
-
-- Recursion is often used in cases when you are searching for something when you don't know the structure.
-- Let's consider this API request:
-
-```
-https://api.spotify.com/v1/search?q=you+make+me&type=track&limit=1
-```
-
-- Let's imagine that this structure changes daily/monthly/weekly whatever it may be, but we still want to be able to pull out the value of `preview_url`.
-
 ##Constructors
 - Constructors are JavaScript functions that are responsible for creating objects based on parameters.
 - Constructors are similar to classes in other OOP languages.
