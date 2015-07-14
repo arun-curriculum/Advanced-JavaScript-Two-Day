@@ -146,6 +146,12 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 ```
 
+- You will need to use this new variable `http` for our listen method:
+
+```javascript
+http.listen(3000);
+```
+
 - To handle the initial handshake, Socket.io registers a `connection` event:
 
 ```javascript
