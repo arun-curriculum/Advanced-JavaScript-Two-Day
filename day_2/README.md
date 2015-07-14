@@ -126,6 +126,43 @@ document.getElementById("some-div").innerHTML = template_html;
 - Socket.io works on the client and the server side to achieve seamless interaction.
 
 ##Socket-Based Chat Mechanism
+- We will be building a chat application in Node using web sockets.
+- We will use Express JS as the application framework.
+
+####The Server Setup
+- For this project we will need to import the Express and Socket.io modules into the project:
+
+```
+var express = require('express');
+var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+```
+
+- To handle the initial handshake, Socket.io registers a `connection` event:
+
+```
+io.on('connection', function(socket) { });
+```
+
+- This is now a unique socket for this specific connection.
+- Any events to this socket can easily be detected and dealt with:
+
+```
+socket.on('event', function(params) { });
+```
+
+- Any event can also be "emitted" from the socket if necessary:
+
+```
+io.emit('event', params);
+```
+
+- You can also emit events to all sockets connected except for yours by using `broadcast`:
+
+```
+socket.broadcast.emit('event', params);
+```
 
 ####The Client Setup
 - The client will also use Socket.io to handle the handshake and any further events.
