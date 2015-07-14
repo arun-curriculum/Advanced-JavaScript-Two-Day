@@ -51,9 +51,16 @@ var oReq = new XMLHttpRequest();
 
 oReq.open('POST', 'URL HERE', true);
 
-oReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+oReq.setRequestHeader('Content-Type', 'application/json');
 
-oReq.send(data);
+var formInfo = {
+	firstname: "Arun",
+	lastname: "Sood",
+	age: 28,
+	username: "arsood"
+};
+
+oReq.send(JSON.stringify(formInfo));
 ```
 
 ##Front-End Templating with Handlebars
