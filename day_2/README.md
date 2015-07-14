@@ -139,7 +139,7 @@ document.getElementById("some-div").innerHTML = template_html;
 ####The Server Setup
 - For this project we will need to import the Express and Socket.io modules into the project:
 
-```
+```javascript
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
@@ -148,26 +148,26 @@ var io = require('socket.io')(http);
 
 - To handle the initial handshake, Socket.io registers a `connection` event:
 
-```
+```javascript
 io.on('connection', function(socket) { });
 ```
 
 - This is now a unique socket for this specific connection.
 - Any events to this socket can easily be detected and dealt with:
 
-```
+```javascript
 socket.on('event', function(params) { });
 ```
 
 - Any event can also be "emitted" from the socket if necessary:
 
-```
+```javascript
 io.emit('event', params);
 ```
 
 - You can also emit events to all sockets connected except for yours by using `broadcast`:
 
-```
+```javascript
 socket.broadcast.emit('event', params);
 ```
 
